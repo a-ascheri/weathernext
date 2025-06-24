@@ -1,0 +1,49 @@
+.weather-chart {
+  --background-color: #1c1c1c;
+  --text-color: #f8f8f8;
+  --border-color: #645be7d2;
+  --accent-color: #a893ea;
+  --chart-bg: #28343115;
+
+  padding: 2rem;
+  background-color: var(--background-color);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+  margin-top: 1rem;
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+  }
+
+  &__loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 16rem;
+
+    &-spinner {
+      animation: spin 1s linear infinite;
+      border-radius: 50%;
+      height: 2rem;
+      width: 2rem;
+      border: 2px solid var(--accent-color);
+      border-top-color: transparent;
+    }
+  }
+
+  &__content {
+    height: 25rem;
+    background-color: var(--chart-bg);
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

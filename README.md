@@ -1,4 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Weather Forecast Application
+
+A Next.js application that displays weather forecast data using the OpenWeather API.
+
+## Features
+
+- Server-side API calls for secure API key handling
+- Real-time weather data visualization using Chart.js
+- Responsive design with Tailwind CSS
+- TypeScript for type safety
+
+## Setup
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env.local` file in the root directory and add your OpenWeather API key:
+   ```
+   OPENWEATHER_API_KEY=your_api_key_here
+   ```
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## Environment Variables
+
+- `OPENWEATHER_API_KEY`: Your OpenWeather API key (required)
+
+## Technologies Used
+
+- Next.js 14
+- React
+- TypeScript
+- Chart.js
+- Tailwind CSS
+- OpenWeather API
 
 ## Getting Started
 

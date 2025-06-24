@@ -1,0 +1,116 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.app-container {
+  // Variables locales al componente App
+  --bg-color: #121212;
+  --accent-color: #734eed;
+  --text-color: #e0e0e0;
+  --input-bg: #181818;
+  --input-border: #7d4e69;
+  --input-focus-bg: #1a1a1a;
+  --input-focus-border: #1e90ff;
+  --btn-bg: #1e90ff;
+  --btn-hover: #187bcd;
+  --placeholder-color: #eee2e2;
+
+  width: clamp(280px, 90%, 480px);
+  max-height: 90vh;
+  padding: clamp(1rem, 4vw, 2rem);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-radius: clamp(0.75rem, 2vw, 1rem);
+  border: 1px solid var(--accent-color);
+  box-shadow: 0 0 20px rgba(9, 115, 121, 0.516);
+  box-sizing: border-box;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) #f1f1f1;
+  animation: fadeIn 0.5s ease-out;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: 4px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -25%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.app-header {
+  font-size: 1.75rem !important;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.weather-icon {
+  font-size: 2rem !important;
+  color: var(--accent-color);
+  transform: translateY(2px);
+  transition: all 0.3s ease !important;
+
+  &:hover {
+    transform: scale(1.2);
+    transition: transform 0.2s ease, filter 0.3s ease;
+    filter: drop-shadow(0 0 6px #00ffeaa2); // <- azul celeste
+  }
+}
+
+.MuiAppBar-root {
+  background-color: var(--input-bg) !important;
+  color: var(--text-color);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.MuiInputBase-root,
+.MuiIconButton-root {
+  color: var(--text-color);
+}
+
+img {
+  margin-top: 1.5rem;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .app-container {
+    padding: 1.25rem;
+    margin: 1rem;
+  }
+
+  input,
+  button {
+    font-size: 0.95rem;
+  }
+
+  button {
+    width: 100%;
+    margin-left: 0;
+  }
+}

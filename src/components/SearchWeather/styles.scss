@@ -1,0 +1,120 @@
+.search-weather {
+  // Variables locales al componente
+  --background-color: #1c1c1c;
+  --text-color: #f8f8f8;
+  --border-color: #645be7d2;
+  --accent-color: #a893ea;
+  --input-bg: #28343115;
+  --input-border: #5b89eb86;
+  --placeholder-color: #cddde5;
+
+  padding: 1rem;
+
+  &__appbar {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color);
+    border-left: 1px solid rgba(28, 62, 109, 0.713);
+    border-right: 1px solid rgba(28, 62, 109, 0.713);
+
+  }
+
+  &__toolbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 0 20px rgba(123, 14, 153, 0.408);
+  }
+
+  &__icon,
+  &__search-button {
+    color: var(--accent-color);
+    font-size: 2rem;
+    flex-shrink: 0;
+    margin-right: 0.75rem;
+  }
+
+  &__input-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    box-shadow: 0 0 12px rgba(9, 115, 121, 0.516);
+    border-radius: 0.5rem;
+    padding: 0 1rem;
+    width: 140px;
+    transition: width 0.3s ease, box-shadow 0.2s ease,
+      border-color 0.3s ease, box-shadow 0.2s ease;
+
+    &:focus-within {
+      width: 200px;
+      border-color: #995beb;
+      box-shadow: 0 0 12px rgba(87, 96, 228, 0.516);
+    }
+  }
+
+  &__input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 1rem;
+  text-align: center;
+
+  input {
+    color: var(--text-color);
+    text-align: center;
+
+    &::placeholder {
+      color: var(--placeholder-color);
+      opacity: 1;
+      text-align: center;
+      transition: opacity 0.2s ease; // animación suave
+    }
+
+    &:focus::placeholder {
+      opacity: 0;
+    }
+  }
+}
+
+
+  &__search-button {
+    margin-left: 0.75rem;
+    padding: 0.5rem;
+
+    svg {
+      color: var(--accent-color);
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+
+
+  &__error {
+    color: rgb(238, 158, 78);
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  &__result {
+    margin-top: 2rem;
+    text-align: center;
+
+    h2 {
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin: 0.25rem 0;
+    }
+
+    img {
+      margin-top: 0.5rem;
+    }
+  }
+}
