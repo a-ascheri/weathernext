@@ -15,6 +15,31 @@ import {
   Legend,
 } from 'chart.js';
 
+// Tipos mínimos para la respuesta utilizada del API de OpenWeather
+interface ForecastItem {
+  dt: number;
+  main: { temp: number };
+}
+interface ForecastResponse {
+  list: ForecastItem[];
+}
+
+// Tipo para los datos del gráfico de react-chartjs-2
+interface LineChartData {
+  labels: string[];
+  datasets: Array<{
+    label: string;
+    data: number[];
+    borderColor: string;
+    backgroundColor: string;
+    tension: number;
+    pointBackgroundColor: string;
+    pointBorderColor: string;
+    pointHoverBackgroundColor: string;
+    pointHoverBorderColor: string;
+  }>;
+}
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -27,7 +52,7 @@ ChartJS.register(
 
 const WeatherChart = () => {
   const { lastSearchedCity, hasSearched } = useAppContext();
-  const [chartData, setChartData] = useState<any>(null);
+  const [chartData, setChartData] = useState<LineChartData | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -37,28 +62,35 @@ const WeatherChart = () => {
       setLoading(true);
       try {
         const response = await fetch(`/api/weather?city=${encodeURIComponent(lastSearchedCity)}`);
-        const data = await response.json();
+        const data: unknown = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.error || 'Error al obtener datos del clima');
+          let message = 'Error al obtener datos del clima';
+          if (data && typeof data === 'object' && 'error' in data) {
+            const e = (data as { error?: unknown }).error;
+            if (typeof e === 'string' && e.trim()) message = e;
+          }
+          throw new Error(message);
         }
+
+        const forecast = data as ForecastResponse;
 
         const tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
-        const filteredData = data.list.filter((item: any) => {
+        const filteredData = forecast.list.filter((item) => {
           const date = new Date(item.dt * 1000);
           return date < tomorrow;
         });
 
-        const labels = filteredData.map((item: any) =>
+        const labels = filteredData.map((item) =>
           new Date(item.dt * 1000).toLocaleTimeString('es-ES', {
             hour: '2-digit',
             minute: '2-digit'
           })
         );
-        const temperatures = filteredData.map((item: any) => item.main.temp);
+        const temperatures = filteredData.map((item) => item.main.temp);
 
-        setChartData({
+        const nextData: LineChartData = {
           labels,
           datasets: [
             {
@@ -73,7 +105,9 @@ const WeatherChart = () => {
               pointHoverBorderColor: '#645be7d2',
             },
           ],
-        });
+        };
+
+        setChartData(nextData);
       } catch (error) {
         console.error('Error al obtener los datos del clima:', error);
       } finally {

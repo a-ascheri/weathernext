@@ -37,7 +37,7 @@ export default function SearchWeather() {
       setHasSearched(true);
       setLastSearchedCity(city);
       setError('');
-    } catch (err) {
+    } catch {
       setError('No se encontró la ciudad.');
       setHasSearched(false);
       setLastSearchedCity('');
