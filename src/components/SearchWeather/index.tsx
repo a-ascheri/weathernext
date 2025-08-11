@@ -1,14 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState, KeyboardEvent } from 'react';
 import { useAppContext } from '@/context/AppContext';
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  InputBase,
-  IconButton,
-} from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import InputBase from '@mui/material/InputBase';
+import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import './styles.scss';
@@ -44,7 +42,7 @@ export default function SearchWeather() {
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleSearch();
     }
@@ -60,7 +58,7 @@ export default function SearchWeather() {
               className="search-weather__input"
               placeholder="Buscar ciudad..."
               value={city}
-              onChange={(e) => setCity(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCity(e.target.value)}
               onKeyDown={handleKeyDown}
               inputProps={{ "aria-label": "buscar ciudad" }}
             />
@@ -68,6 +66,7 @@ export default function SearchWeather() {
           <IconButton
             onClick={handleSearch}
             className="search-weather__search-button"
+            aria-label="buscar"
           >
             <SearchIcon />
           </IconButton>
